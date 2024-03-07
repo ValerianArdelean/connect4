@@ -70,8 +70,12 @@
             </div>
         </div>
         <section class="flex">
-            <button id="yellow" class="text" onclick="buttons(this.id)" >yellow</button>
-            <button id="red" class="text" onclick="buttons(this.id)" >red</button>
+            <button id="yellow" class="text" oponent="red" onclick="buttons(this.id, this.getAttribute('oponent'))">
+                yellow
+            </button>
+            <button id="red" class="text" oponent="yellow" onclick="buttons(this.id, this.getAttribute('oponent'))">
+                red
+            </button>
         </section>
         <script src="script.js"></script>
     </body>
