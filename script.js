@@ -49,7 +49,7 @@ function col(id) {
     }
 }
 
-function checkWinner(color) {
+function checkWinner(color) {/*checking rows and columns*/
     for (let i = 6, l = 1; i >= 1 || l <= 7; --i, ++l) {
         for (let j = 0; j < 4; ++j) {
             if (mt[i][1 + j] == color && mt[i][2 + j] == color &&
@@ -61,16 +61,23 @@ function checkWinner(color) {
                 return true;
             }
         }
-    }
+    }/*checking paralels to main diagonal*/
     for (let i = 0; i < 3; ++i) {
-        for (let j = 0; j < 3; ++j) {
-            if (mt[1 + i][1 + j + i] == color && mt[2 + i][2 + j + i] == color &&
+        for (let j = 0; j <= 3; ++j) {/*above main diagon */
+            if (j < 3 && mt[1 + i][1 + j + i] == color && mt[2 + i][2 + j + i] == color &&
                 mt[3 + i][3 + j + i] == color && mt[4 + i][4 + j + i] == color) {
                 return true;
-            }
+            }/*below main diagon*/
             if (j < 2 && i < 2 &&
                 mt[2 + j][1] == color && mt[3 + j][2] == color &&
                 mt[4 + j][3] == color && mt[5 + j][4] == color) {
+                return true;
+            }/*above second diagon */
+            if (mt[1 + i][(7 - j) - i] == color && mt[2 + i][(6 - j) - i] == color &&
+                mt[3 + i][(5 - j) - i] == color && mt[4 + i][(4 - j) - i] == color) {
+                return true;
+            }/*below second diagon*/
+            if (i < 2 && j < 2 && mt[(2 - j) + i][7 - i] == color && mt[(3 - j) + i][6 - i] == color && mt[(4 - j) + i][5 - i] == color && mt[(5 - j) + i][4 - i] == color) {
                 return true;
             }
         }
