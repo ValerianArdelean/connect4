@@ -17,62 +17,23 @@ function checkWinner2(color) {
                 (j <= 3 && mt[j][i]) == color && mt[j + 1][i] == color && mt[j + 2][i] == color && mt[j + 3][i] == color) {
                     return true;
             }
+            if ((i <= 4 && j <= 3 && mt[j][j + i - 1] == color && mt[j + 1][j + 1 + i - 1] == color && mt[j + 2][j + 2 + i - 1] == color && mt[j + 3][j + 3 + i - 1] == color) ||
+                (i <= 2 && mt[j + i][j] == color && mt[j + i + 1][j + 1] == color && mt[j + i + 2][j + 2] == color && mt[j + i + 3][j + 3] == color)) {
+                return true;
+            }
+            if ((i <= 4 && j <= 3 && mt[j][(7 - j + 1) - i + 1] == color && mt[j + 1][(7 - j + 1) - i + 1 - 1] == color && mt[j + 2][(7 - j + 1) - i + 1 - 2] == color && mt[j + 3][(7 - j + 1) - i + 1 - 3] == color) ||
+                (i <= 2 && mt[j + i][(7 - j + 1)] == color && mt[j + i + 1][(7 - j + 1) - 1] == color && mt[j + i + 2][(7 - j + 1) - 2] == color && mt[j + i + 3][(7 - j + 1) - 3] == color)) {
+                return true;
+            }
         }
     }
+    return false;
 }
 
 function setMessage(message, color) {
     element = document.getElementById("message");
     element.children[0].innerText = message;
     element.children[0].style.color = color;
-}
-/*
- if (mt[i][1 + j] == color && mt[i][2 + j] == color &&
-     mt[i][3 + j] == color && mt[i][4 + j] == color) {
-     return true;
- }
- if (mt[6 - j][l] == color && mt[5 - j][l] == color &&
-     mt[4 - j][l] == color && mt[3 - j][l] == color) {
-     return true;
- }
- */
-function checkWinner(color) {/*checking rows and columns*/
-    for (let i = LINES_NO, l = 1; i >= 1 || l <= COLUMNS_NO; --i, ++l) {
-        for (let j = 0; j < FOUR; ++j) {
-            if (mt[i][ONE + j] == color && mt[i][TWO + j] == color &&
-                mt[i][THREE + j] == color && mt[i][FOUR + j] == color) {
-                return true;
-            }
-            if (mt[LINES_NO - j][l] == color && mt[LINES_NO - 1 - j][l] == color &&
-                mt[FOUR - j][l] == color && mt[THREE - j][l] == color) {
-                return true;
-            }
-        }
-    }/*checking paralels to main diagonal*/
-    for (let i = 0; i < THREE; ++i) {
-        for (let j = 0; j < FOUR; ++j) {/*above main diagon */
-            if (j < FOUR - 1 &&
-                mt[ONE + i][ONE + j + i] == color && mt[TWO + i][TWO + j + i] == color &&
-                mt[THREE + i][THREE + j + i] == color && mt[FOUR + i][FOUR + j + i] == color) {
-                return true;
-            }/*below main diagon*/
-            if (j < TWO && i < TWO &&
-                mt[TWO + j][ONE] == color && mt[THREE + j][TWO] == color &&
-                mt[FOUR + j][THREE] == color && mt[LINES_NO - 1 + j][FOUR] == color) {
-                return true;
-            }/*above second diagon */
-            if (mt[ONE + i][(COLUMNS_NO - j) - i] == color && mt[TWO + i][(LINES_NO - j) - i] == color &&
-                mt[THREE + i][(LINES_NO - 1 - j) - i] == color && mt[FOUR + i][(FOUR - j) - i] == color) {
-                return true;
-            }/*below second diagon*/
-            if (i < TWO && j < TWO &&
-                mt[(TWO + j) + i][COLUMNS_NO - i] == color && mt[(THREE + j) + i][LINES_NO - i] == color &&
-                mt[(FOUR + j) + i][LINES_NO - 1 - i] == color && mt[(LINES_NO - 1 + j) + i][FOUR - i] == color) {
-                return true;
-            }
-        }
-    }
-    return false;
 }
 
 function buttons(color, oponent) {
