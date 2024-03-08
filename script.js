@@ -3,17 +3,20 @@ let clicks = {
     red: 0,
     yellow: 0,
 };
-let message = document.getElementById("message");
+
+function setMessage(message, color) {
+    element = document.getElementById("message");
+    element.children[0].innerText = message;
+    element.children[0].style.color = color;
+}
 
 function buttons(color, oponent) {
     if (clicks[color] === 0) {
         pen = color;
         opo = oponent;
-        message.children[0].style.color = color;
-        message.children[0].innerText = `you chosen ${pen}`;
-        console.log(clicks[color]);
+        setMessage("you chosen " + pen, color);
     } else {
-        message.children[0].innerText = "don't try on cheating !";
+        setMessage("don't try on cheating !", color);
     }
 }
 
@@ -22,15 +25,15 @@ function col(id) {
     if (pen) {
         if (clicks[pen] === 0) {
             id = parseInt(id);
-            columns[id] += 1;
+            ++columns[id];
             let col = document.getElementById(id);
             col.children[6 - columns[id]].style.backgroundColor = pen;
             ++clicks[pen];
             clicks[opo] = 0;
         } else {
-            message.children[0].innerText = "change color !!";
+            setMessage("change color !!", "black");
         }
     } else {
-        message.children[0].innerText = "choose a color first !!!";
+        setMessage("choose a color first !!!", "black");
     }
 }

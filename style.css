@@ -1,8 +1,14 @@
+body {
+    background: radial-gradient(#DBDBDB, #AAAAAA);
+    width: 100%;
+    height: 58em;
+}
 .text {
     text-align: center;
     font-family: sans-serif;
     text-transform: uppercase;
     letter-spacing: .1rem;
+    margin-top: 2em;
 }
 .flex {
     display: flex;
@@ -15,8 +21,6 @@
 #grid {
     width: 650px;
     height: 550px;
-    background-color: #72BBC9;
-    border-radius: 30px;
     margin: auto;
     margin-top: 3%;
     margin-bottom: 3%;
