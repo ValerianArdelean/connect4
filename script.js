@@ -1,12 +1,13 @@
+const linesNo = 6, columnsNo = 7, four = 4;
+let columns = [0, 0, 0, 0, 0, 0, 0, 0];
 let pen = "", opo = "", winner = "";
 let clicks = {
     red: 0,
     yellow: 0,
 };
-
-let mt = ["0", "1", "2", "3", "4", "5", "6"];
+let mt = [[], [], [], [], [], [], []];
 for (let i = 1; i <= 6; ++i) {
-    mt[i] = ["0", "1", "2", "3", "4", "5", "6", "7"];
+    mt[i] = [];
 }
 
 function setMessage(message, color) {
@@ -16,8 +17,8 @@ function setMessage(message, color) {
 }
 
 function checkWinner(color) {/*checking rows and columns*/
-    for (let i = 6, l = 1; i >= 1 || l <= 7; --i, ++l) {
-        for (let j = 0; j < 4; ++j) {
+    for (let i = linesNo, l = 1; i >= 1 || l <= columnsNo; --i, ++l) {
+        for (let j = 0; j < four; ++j) {
             if (mt[i][1 + j] == color && mt[i][2 + j] == color &&
                 mt[i][3 + j] == color && mt[i][4 + j] == color) {
                 return true;
@@ -28,9 +29,9 @@ function checkWinner(color) {/*checking rows and columns*/
             }
         }
     }/*checking paralels to main diagonal*/
-    for (let i = 0; i < 3; ++i) {
-        for (let j = 0; j <= 3; ++j) {/*above main diagon */
-            if (j < 3 &&
+    for (let i = 0; i < four - 1; ++i) {
+        for (let j = 0; j < four; ++j) {/*above main diagon */
+            if (j < four - 1 &&
                 mt[1 + i][1 + j + i] == color && mt[2 + i][2 + j + i] == color &&
                 mt[3 + i][3 + j + i] == color && mt[4 + i][4 + j + i] == color) {
                 return true;
@@ -63,14 +64,13 @@ function buttons(color, oponent) {
     }
 }
 
-let columns = [0, 0, 0, 0, 0, 0, 0, 0];
 function col(id) {
     if (pen && !winner) {
         if (clicks[pen] === 0) {
             id = parseInt(id);
             ++columns[id];
-            document.getElementById(id).children[6 - columns[id]].style.backgroundColor = pen;
-            mt[7 - columns[id]][id] = pen;
+            document.getElementById(id).children[linesNo - columns[id]].style.backgroundColor = pen;
+            mt[columnsNo - columns[id]][id] = pen;
             ++clicks[pen];
             clicks[opo] = 0;
             winner = checkWinner(pen);
