@@ -16,6 +16,23 @@ for (let i = 0; i <= COLUMNS_NO; ++i) {
     mt[i] = [];
 }
 
+function createCells() {
+    let grid = document.getElementById("grid");
+    grid.setAttribute("class", "flex");
+    for (let i = 1; i <= COLUMNS_NO; ++i) {
+        let column = document.createElement("div");
+        column.setAttribute("id", i);
+        column.setAttribute("class", "col");
+        column.setAttribute("onclick", "col(this.id)");
+        for (let j = 0; j < LINES_NO; ++j) {
+            let cell = document.createElement("div");
+            cell.setAttribute("class", "cell");
+            column.appendChild(cell);
+        }
+        grid.appendChild(column);
+    }
+}
+
 function checkWinner2(color) {
     for (let i = 1; i <= COLUMNS_NO; ++i) {
         for (let j = 1; j <= FOUR; ++j) {
