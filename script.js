@@ -67,6 +67,7 @@ function createCollumnsAndCells() {
     for (let i = 1; i <= COLUMNS_NO; ++i) {
         let column = document.createElement("div");
         column.setAttribute("id", i);
+        column.setAttribute("class", "col");
         column.setAttribute("onclick", "column(this.id)");
         for (let j = 0; j < LINES_NO; ++j) {
             let cell = document.createElement("div");
