@@ -5,9 +5,9 @@ const THREE = 3;
 const TWO = 2;
 const ONE = 1;
 
-let mt = [[], [], [], [], [], [], [], []];
+let grid = [[], [], [], [], [], [], [], []];
 for (let i = 0; i <= COLUMNS_NO; ++i) {
-    mt[i] = [];
+    grid[i] = [];
 }
 
 let game = {
@@ -25,35 +25,35 @@ function checkWinner2(color) {
     for (let i = 1; i <= COLUMNS_NO; ++i) {
         for (let j = 1; j <= FOUR; ++j) {
             if ((i <= LINES_NO &&//checking lines and columns
-                 mt[i][j] == color && mt[i][j + 1] == color &&
-                 mt[i][j + TWO] == color && mt[i][j + THREE] == color) ||
+                 grid[i][j] == color && grid[i][j + 1] == color &&
+                 grid[i][j + TWO] == color && grid[i][j + THREE] == color) ||
                  (j <= THREE &&
-                 mt[j][i]) == color && mt[j + 1][i] == color &&
-                 mt[j + TWO][i] == color && mt[j + THREE][i] == color) {
+                 grid[j][i]) == color && grid[j + 1][i] == color &&
+                 grid[j + TWO][i] == color && grid[j + THREE][i] == color) {
                     return true;
             }//checking paralels above main diagonal
             if ((i <= FOUR && j <= THREE &&
-                 mt[j][j + i - 1] == color &&
-                 mt[j + 1][j + 1 + i - 1] == color &&
-                 mt[j + TWO][j + TWO + i - 1] == color &&
-                 mt[j + THREE][j + THREE + i - 1] == color) ||
+                 grid[j][j + i - 1] == color &&
+                 grid[j + 1][j + 1 + i - 1] == color &&
+                 grid[j + TWO][j + TWO + i - 1] == color &&
+                 grid[j + THREE][j + THREE + i - 1] == color) ||
                 (i <= TWO && j <= TWO &&//checking paralels bellow main diagonal
-                 mt[j + i][j] == color &&
-                 mt[j + i + 1][j + 1] == color &&
-                 mt[j + i + TWO][j + TWO] == color &&
-                 mt[j + i + THREE][j + THREE] == color)) {
+                 grid[j + i][j] == color &&
+                 grid[j + i + 1][j + 1] == color &&
+                 grid[j + i + TWO][j + TWO] == color &&
+                 grid[j + i + THREE][j + THREE] == color)) {
                     return true;
             }//checking paralels above second diagonal
             if ((i <= FOUR && j <= THREE &&
-                 mt[j][(COLUMNS_NO - j + 1) - i + 1] == color &&
-                 mt[j + 1][(COLUMNS_NO - j + 1) - i + 1 - 1] == color &&
-                 mt[j + TWO][(COLUMNS_NO - j + 1) - i + 1 - 2] == color &&
-                 mt[j + THREE][(COLUMNS_NO - j + 1) - i + 1 - THREE] == color) ||
+                 grid[j][(COLUMNS_NO - j + 1) - i + 1] == color &&
+                 grid[j + 1][(COLUMNS_NO - j + 1) - i + 1 - 1] == color &&
+                 grid[j + TWO][(COLUMNS_NO - j + 1) - i + 1 - 2] == color &&
+                 grid[j + THREE][(COLUMNS_NO - j + 1) - i + 1 - THREE] == color) ||
                 (i <= TWO && j <= TWO &&//checking paralels bellow second diagonal
-                 mt[j + i][(COLUMNS_NO - j + 1)] == color &&
-                 mt[j + i + 1][(COLUMNS_NO - j + 1) - 1] == color &&
-                 mt[j + i + TWO][(COLUMNS_NO - j + 1) - TWO] == color &&
-                 mt[j + i + THREE][(COLUMNS_NO - j + 1) - THREE] == color)) {
+                 grid[j + i][(COLUMNS_NO - j + 1)] == color &&
+                 grid[j + i + 1][(COLUMNS_NO - j + 1) - 1] == color &&
+                 grid[j + i + TWO][(COLUMNS_NO - j + 1) - TWO] == color &&
+                 grid[j + i + THREE][(COLUMNS_NO - j + 1) - THREE] == color)) {
                     return true;
             }
         }
@@ -99,7 +99,7 @@ function column(id) {
             id = parseInt(id);
             ++game.columns[id];
             document.getElementById(id).children[LINES_NO - game.columns[id]].style.backgroundColor = game.pen;
-            mt[COLUMNS_NO - game.columns[id]][id] = game.pen;
+            grid[COLUMNS_NO - game.columns[id]][id] = game.pen;
             ++game.clicks[game.pen];
             game.clicks[game.opo] = 0;
             game.winner = checkWinner2(game.pen);
