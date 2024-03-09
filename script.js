@@ -5,8 +5,8 @@ let clicks = {
     red: 0,
     yellow: 0,
 };
-let mt = [[], [], [], [], [], [], []];
-for (let i = 1; i <= LINES_NO; ++i) {
+let mt = [[], [], [], [], [], [], [], []];
+for (let i = 0; i <= COLUMNS_NO; ++i) {
     mt[i] = [];
 }
 
@@ -18,11 +18,11 @@ function checkWinner2(color) {
                     return true;
             }
             if ((i <= 4 && j <= 3 && mt[j][j + i - 1] == color && mt[j + 1][j + 1 + i - 1] == color && mt[j + 2][j + 2 + i - 1] == color && mt[j + 3][j + 3 + i - 1] == color) ||
-                (i <= 2 && mt[j + i][j] == color && mt[j + i + 1][j + 1] == color && mt[j + i + 2][j + 2] == color && mt[j + i + 3][j + 3] == color)) {
+                (i <= 2 && j <= 2 && mt[j + i][j] == color && mt[j + i + 1][j + 1] == color && mt[j + i + 2][j + 2] == color && mt[j + i + 3][j + 3] == color)) {
                 return true;
             }
-            if ((i <= 4 && mt[j][(7 - j + 1) - i + 1] == color && mt[j + 1][(7 - j + 1) - i + 1 - 1] == color && mt[j + 2][(7 - j + 1) - i + 1 - 2] == color && mt[j + 3][(7 - j + 1) - i + 1 - 3] == color) ||
-                (i <= 2 && mt[j + i][(7 - j + 1)] == color && mt[j + i + 1][(7 - j + 1) - 1] == color && mt[j + i + 2][(7 - j + 1) - 2] == color && mt[j + i + 3][(7 - j + 1) - 3] == color)) {
+            if ((i <= 4 && j <= 3 && mt[j][(7 - j + 1) - i + 1] == color && mt[j + 1][(7 - j + 1) - i + 1 - 1] == color && mt[j + 2][(7 - j + 1) - i + 1 - 2] == color && mt[j + 3][(7 - j + 1) - i + 1 - 3] == color) ||
+                (i <= 2 && j <= 2 && mt[j + i][(7 - j + 1)] == color && mt[j + i + 1][(7 - j + 1) - 1] == color && mt[j + i + 2][(7 - j + 1) - 2] == color && mt[j + i + 3][(7 - j + 1) - 3] == color)) {
                 return true;
             }
         }
