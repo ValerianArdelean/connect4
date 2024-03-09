@@ -5,11 +5,6 @@ const THREE = 3;
 const TWO = 2;
 const ONE = 1;
 
-let grid = [[], [], [], [], [], [], [], []];
-for (let i = 0; i <= COLUMNS_NO; ++i) {
-    grid[i] = [];
-}
-
 let game = {
     columns: [0, 0, 0, 0, 0, 0, 0, 0],
     pen: "",
@@ -18,42 +13,47 @@ let game = {
     clicks: {
         red: 0,
         yellow: 0,
-    }
+    },
+    grid: [[], [], [], [], [], [], [], []]
+}
+
+for (let i = 0; i <= COLUMNS_NO; ++i) {
+    game.grid[i] = [];
 }
 
 function checkWinner2(color) {
     for (let i = 1; i <= COLUMNS_NO; ++i) {
         for (let j = 1; j <= FOUR; ++j) {
             if ((i <= LINES_NO &&//checking lines and columns
-                 grid[i][j] == color && grid[i][j + 1] == color &&
-                 grid[i][j + TWO] == color && grid[i][j + THREE] == color) ||
+                 game.grid[i][j] == color && game.grid[i][j + 1] == color &&
+                 game.grid[i][j + TWO] == color && game.grid[i][j + THREE] == color) ||
                  (j <= THREE &&
-                 grid[j][i]) == color && grid[j + 1][i] == color &&
-                 grid[j + TWO][i] == color && grid[j + THREE][i] == color) {
+                 game.grid[j][i]) == color && game.grid[j + 1][i] == color &&
+                 game.grid[j + TWO][i] == color && game.grid[j + THREE][i] == color) {
                     return true;
             }//checking paralels above main diagonal
             if ((i <= FOUR && j <= THREE &&
-                 grid[j][j + i - 1] == color &&
-                 grid[j + 1][j + 1 + i - 1] == color &&
-                 grid[j + TWO][j + TWO + i - 1] == color &&
-                 grid[j + THREE][j + THREE + i - 1] == color) ||
+                 game.grid[j][j + i - 1] == color &&
+                 game.grid[j + 1][j + 1 + i - 1] == color &&
+                 game.grid[j + TWO][j + TWO + i - 1] == color &&
+                 game.grid[j + THREE][j + THREE + i - 1] == color) ||
                 (i <= TWO && j <= TWO &&//checking paralels bellow main diagonal
-                 grid[j + i][j] == color &&
-                 grid[j + i + 1][j + 1] == color &&
-                 grid[j + i + TWO][j + TWO] == color &&
-                 grid[j + i + THREE][j + THREE] == color)) {
+                 game.grid[j + i][j] == color &&
+                 game.grid[j + i + 1][j + 1] == color &&
+                 game.grid[j + i + TWO][j + TWO] == color &&
+                 game.grid[j + i + THREE][j + THREE] == color)) {
                     return true;
             }//checking paralels above second diagonal
             if ((i <= FOUR && j <= THREE &&
-                 grid[j][(COLUMNS_NO - j + 1) - i + 1] == color &&
-                 grid[j + 1][(COLUMNS_NO - j + 1) - i + 1 - 1] == color &&
-                 grid[j + TWO][(COLUMNS_NO - j + 1) - i + 1 - 2] == color &&
-                 grid[j + THREE][(COLUMNS_NO - j + 1) - i + 1 - THREE] == color) ||
+                 game.grid[j][(COLUMNS_NO - j + 1) - i + 1] == color &&
+                 game.grid[j + 1][(COLUMNS_NO - j + 1) - i + 1 - 1] == color &&
+                 game.grid[j + TWO][(COLUMNS_NO - j + 1) - i + 1 - 2] == color &&
+                 game.grid[j + THREE][(COLUMNS_NO - j + 1) - i + 1 - THREE] == color) ||
                 (i <= TWO && j <= TWO &&//checking paralels bellow second diagonal
-                 grid[j + i][(COLUMNS_NO - j + 1)] == color &&
-                 grid[j + i + 1][(COLUMNS_NO - j + 1) - 1] == color &&
-                 grid[j + i + TWO][(COLUMNS_NO - j + 1) - TWO] == color &&
-                 grid[j + i + THREE][(COLUMNS_NO - j + 1) - THREE] == color)) {
+                 game.grid[j + i][(COLUMNS_NO - j + 1)] == color &&
+                 game.grid[j + i + 1][(COLUMNS_NO - j + 1) - 1] == color &&
+                 game.grid[j + i + TWO][(COLUMNS_NO - j + 1) - TWO] == color &&
+                 game.grid[j + i + THREE][(COLUMNS_NO - j + 1) - THREE] == color)) {
                     return true;
             }
         }
@@ -98,8 +98,9 @@ function column(id) {
         if (game.clicks[game.pen] === 0) {
             id = parseInt(id);
             ++game.columns[id];
-            document.getElementById(id).children[LINES_NO - game.columns[id]].style.backgroundColor = game.pen;
-            grid[COLUMNS_NO - game.columns[id]][id] = game.pen;
+            let cell = document.getElementById(id).children[LINES_NO - game.columns[id]];
+            cell.style.backgroundColor = game.pen;
+            game.grid[COLUMNS_NO - game.columns[id]][id] = game.pen;
             ++game.clicks[game.pen];
             game.clicks[game.opo] = 0;
             game.winner = checkWinner2(game.pen);
