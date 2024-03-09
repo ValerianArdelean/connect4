@@ -1,10 +1,16 @@
 const LINES_NO = 6, COLUMNS_NO = 7, FOUR = 4, THREE = 3, TWO = 2, ONE = 1;
-let columns = [0, 0, 0, 0, 0, 0, 0, 0];
-let pen = "", opo = "", winner = "";
-let clicks = {
-    red: 0,
-    yellow: 0,
-};
+
+let game = {
+    columns: [0, 0, 0, 0, 0, 0, 0, 0],
+    pen: "",
+    opo: "",
+    winner: "",
+    clicks: {
+        red: 0,
+        yellow: 0,
+    }
+}
+
 let mt = [[], [], [], [], [], [], [], []];
 for (let i = 0; i <= COLUMNS_NO; ++i) {
     mt[i] = [];
@@ -57,33 +63,33 @@ function setMessage(message, color) {
 }
 
 function buttons(color, oponent) {
-    if (clicks[color] === 0 && !winner) {
-        pen = color;
-        opo = oponent;
-        setMessage("you chosen " + pen, color);
-    } else if (!winner) {
-        setMessage("don't try on cheating !", color);
+    if (game.clicks[color] === 0 && !game.winner) {
+        game.pen = color;
+        game.opo = oponent;
+        setMessage("you chosen " + game.pen, game.color);
+    } else if (!game.winner) {
+        setMessage("don't try on cheating !", game.color);
     }
 }
 
 function col(id) {
-    if (pen && !winner) {
-        if (clicks[pen] === 0) {
+    if (game.pen && !game.winner) {
+        if (game.clicks[game.pen] === 0) {
             id = parseInt(id);
-            ++columns[id];
-            document.getElementById(id).children[LINES_NO - columns[id]].style.backgroundColor = pen;
-            mt[COLUMNS_NO - columns[id]][id] = pen;
-            ++clicks[pen];
-            clicks[opo] = 0;
-            winner = checkWinner2(pen);
-            if (winner) {
-                alert(`Felicitari !!! ${pen} a castigat !!!`);
-                setMessage(`Felicitari !!! ${pen} a castigat !!!`);
+            ++game.columns[id];
+            document.getElementById(id).children[LINES_NO - game.columns[id]].style.backgroundColor = game.pen;
+            mt[COLUMNS_NO - game.columns[id]][id] = game.pen;
+            ++game.clicks[game.pen];
+            game.clicks[game.opo] = 0;
+            game.winner = checkWinner2(game.pen);
+            if (game.winner) {
+                alert(`Felicitari !!! ${game.pen} a castigat !!!`);
+                setMessage(`Felicitari !!! ${game.pen} a castigat !!!`, game.pen);
             }
         } else {
             setMessage("change color !!", "black");
         }
-    } else if (!pen && !winner) {
+    } else if (!game.pen && !game.winner) {
         setMessage("choose a color first !!!", "black");
     }
 }
