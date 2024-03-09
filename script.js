@@ -103,8 +103,8 @@ function userMove(id) {
             game.clicks[game.opo] = 0;
             game.winner = checkWinner2(game.pen);
             if (game.winner) {
-                alert(`Felicitari !!! ${game.pen} a castigat !!!`);
-                setMessage(`Felicitari !!! ${game.pen} a castigat !!!`, game.pen);
+                alert(`Congratulations !!! the player using ${game.pen} has won !!!`);
+                setMessage(`Congratulations !!! the player using ${game.pen} has won !!!`, game.pen);
             }
         } else {
             setMessage("change color !!", "black");
