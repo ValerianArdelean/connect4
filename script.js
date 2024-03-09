@@ -17,10 +17,6 @@ let game = {
     grid: [[], [], [], [], [], [], [], []]
 }
 
-for (let i = 0; i <= COLUMNS_NO; ++i) {
-    game.grid[i] = [];
-}
-
 function checkWinner2(color) {
     for (let i = 1; i <= COLUMNS_NO; ++i) {
         for (let j = 1; j <= FOUR; ++j) {
@@ -67,9 +63,11 @@ function setMessage(message, color) {
     element.children[0].style.color = color;
 }
 
-function createCollumnsAndCells() {
+function createRemoteAndLocalGrid() {
     let grid = document.getElementById("grid");
+    game.grid[0] = [];
     for (let i = 1; i <= COLUMNS_NO; ++i) {
+        game.grid[i] = [];
         let column = document.createElement("div");
         column.setAttribute("id", i);
         column.setAttribute("class", "col");
