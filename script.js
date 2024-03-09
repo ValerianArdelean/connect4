@@ -57,12 +57,6 @@ function checkWinner2(color) {
     return false;
 }
 
-function setMessage(message, color) {
-    element = document.getElementById("message");
-    element.children[0].innerText = message;
-    element.children[0].style.color = color;
-}
-
 function createRemoteAndLocalGrid() {
     let grid = document.getElementById("grid");
     game.grid[0] = [];
@@ -71,7 +65,7 @@ function createRemoteAndLocalGrid() {
         let column = document.createElement("div");
         column.setAttribute("id", i);
         column.setAttribute("class", "col");
-        column.setAttribute("onclick", "column(this.id)");
+        column.setAttribute("onclick", "userMove(this.id)");
         for (let j = 0; j < LINES_NO; ++j) {
             let cell = document.createElement("div");
             cell.setAttribute("class", "cell");
@@ -81,7 +75,13 @@ function createRemoteAndLocalGrid() {
     }
 }
 
-function buttons(color, oponent) {
+function setMessage(message, color) {
+    element = document.getElementById("message");
+    element.children[0].innerText = message;
+    element.children[0].style.color = color;
+}
+
+function userChoice(color, oponent) {
     if (game.clicks[color] === 0 && !game.winner) {
         game.pen = color;
         game.opo = oponent;
@@ -91,7 +91,7 @@ function buttons(color, oponent) {
     }
 }
 
-function column(id) {
+function userMove(id) {
     if (game.pen && !game.winner) {
         if (game.clicks[game.pen] === 0) {
             id = parseInt(id);
