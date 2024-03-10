@@ -8,7 +8,7 @@ const ONE = 1;
 let game = {
     columns: [0, 0, 0, 0, 0, 0, 0, 0],
     pen: "",
-	oponent: "",
+    oponent: "",
     winner: "",
     clicks: {
         red: 0,
@@ -96,7 +96,7 @@ function userMove(element) {
         if (game.clicks[game.pen] === 0) {
             id = parseInt(element.id);
             ++game.columns[id];
-			let cell = element.children[LINES_NO - game.columns[id]];
+	    let cell = element.children[LINES_NO - game.columns[id]];
             cell.style.backgroundColor = game.pen;
             game.grid[COLUMNS_NO - game.columns[id]][id] = game.pen;
             ++game.clicks[game.pen];
