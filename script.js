@@ -65,7 +65,7 @@ function createRemoteAndLocalGrid() {
         let column = document.createElement("div");
         column.setAttribute("id", i);
         column.setAttribute("class", "col");
-        column.setAttribute("onclick", "userMove(this.id)");
+        column.setAttribute("onclick", "userMove(this)");
         for (let j = 0; j < LINES_NO; ++j) {
             let cell = document.createElement("div");
             cell.setAttribute("class", "cell");
@@ -91,12 +91,12 @@ function userChoice(color, oponent) {
     }
 }
 
-function userMove(id) {
+function userMove(element) {
     if (game.pen && !game.winner) {
         if (game.clicks[game.pen] === 0) {
-            id = parseInt(id);
+            id = parseInt(element.id);
             ++game.columns[id];
-            let cell = document.getElementById(id).children[LINES_NO - game.columns[id]];
+			let cell = element.children[LINES_NO - game.columns[id]];
             cell.style.backgroundColor = game.pen;
             game.grid[COLUMNS_NO - game.columns[id]][id] = game.pen;
             ++game.clicks[game.pen];
