@@ -7,19 +7,26 @@
         <link href="style.css" rel="stylesheet"/>
     </head>
     <body onload="createRemoteAndLocalGrid()">
-        <h1 class="text">***connect4***</h1>
-        <section id="message">
-            <h2 class="text"> choose color </h2>
-        </section>
-        <div id="grid" class="flex"></div>
-        <section class="flex">
-            <button id="yellow" class="text" oponent="red" onclick="userChoice(this.id, this.getAttribute('oponent'))">
-                yellow
-            </button>
-            <button id="red" class="text" oponent="yellow" onclick="userChoice(this.id, this.getAttribute('oponent'))">
-                red
-            </button>
-        </section>
+		<header>
+			<h1 class="text">***connect4***</h1>
+		</header>
+		<main>
+			<section id="message">
+				<h2 class="text"> choose color </h2>
+			</section>
+			<div id="grid" class="flex"></div>
+			<section class="flex">
+				<button id="yellow" class="text" oponent="red" onclick="userChoice(this.id, this.getAttribute('oponent'))">
+					yellow
+				</button>
+				<button id="red" class="text" oponent="yellow" onclick="userChoice(this.id, this.getAttribute('oponent'))">
+					red
+				</button>
+			</section>
+		</main>
+		<footer>
+			<p class="text fade">Made with &hearts; by Valerian @ WellCode.</p>
+		</footer>
         <script src="script.js"></script>
     </body>
 </html>
