@@ -24,8 +24,8 @@ function checkWinner2(color) {
                  game.grid[i][j] == color && game.grid[i][j + 1] == color &&
                  game.grid[i][j + TWO] == color && game.grid[i][j + THREE] == color) ||
                  (j <= THREE &&
-                 game.grid[j][i]) == color && game.grid[j + 1][i] == color &&
-                 game.grid[j + TWO][i] == color && game.grid[j + THREE][i] == color) {
+                 game.grid[j][i] == color && game.grid[j + 1][i] == color &&
+                 game.grid[j + TWO][i] == color && game.grid[j + THREE][i] == color)) {
                     return true;
             }//checking paralels above main diagonal
             if ((i <= FOUR && j <= THREE &&
@@ -68,7 +68,7 @@ function createRemoteAndLocalGrid() {
         column.setAttribute("onclick", "userMove(this)");
         for (let j = 0; j < LINES_NO; ++j) {
             let cell = document.createElement("div");
-            cell.setAttribute("class", "cell");
+            cell.setAttribute("class", "cell borderRadius");
             column.appendChild(cell);
         }
         grid.appendChild(column);

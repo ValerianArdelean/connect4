@@ -1,23 +1,32 @@
-body {
-    background: radial-gradient(#DBDBDB, #AAAAAA);
-    width: 100%;
-    height: 58em;
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
+
 .text {
-    text-align: center;
-    font-family: sans-serif;
-    text-transform: uppercase;
-    letter-spacing: .1rem;
+	font-family: sans-serif;
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-stretch: ultra-expanded;
     margin-top: 2em;
 }
+
 .flex {
     display: flex;
     display: -webkit-flexbox;
     flex-wrap: wrap;
     -webkit-flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
 }
+
+body {
+	background: radial-gradient(#DBDBDB, #AAAAAA);
+	flex-direction: column;
+	height: 100vh;
+}
+
 #grid {
     width: 650px;
     height: 550px;
@@ -25,37 +34,49 @@ body {
     margin-top: 3%;
     margin-bottom: 3%;
 }
+
 .cell {
     width: 80px;
     height:80px;
     background-color: white;
-    border-radius: 30px;
-    margin: 5px;
+	margin: 5px;
 }
+
 .col:hover .cell {
     cursor: pointer;
-    margin: 3px;
-    width: 84px;
-    height:84px;
+    margin: 4px;
+    width: 82px;
+    height:82px;
 }
+
 button {
-    border-radius: 10px;
-    width: 120px;
-    padding: 7px 20px;
-    margin: 1px;
-    &:hover {
-        cursor: pointer;
-    }
+	border: 1px solid #91C8D3;
+	padding: 10px;
+	cursor: pointer;
+	width: 115px;
+	margin: 3px;
 }
+
 #yellow {
     background-color: yellow;
-    &:hover {
-        background-color: #DBBE00;
-    }
 }
+
 #red {
-    background-color: red;
-    &:hover {
-        background-color: #B52A2A;
-    }
+	background-color: red;
+}
+
+#yellow:hover, #red:hover {
+	transform: scale(1.07);  /* Slightly enlarge the button */
+}
+
+.borderRadius {
+	border-radius: 30px;
+}
+
+.fade {
+	opacity: 30%;
+}
+
+footer {
+	margin-top: auto;
 }
