@@ -17,39 +17,25 @@ let game = {
 	grid: [[], [], [], [], [], [], [], []]
 }
 
-function checkWinner2(color) {
-	for (let i = 1; i <= COLUMNS_NO; ++i) {
-		for (let j = 1; j <= FOUR; ++j) {
-			if ((i <= LINES_NO &&//checking lines and columns
-				 game.grid[i][j] == color && game.grid[i][j + 1] == color &&
-				 game.grid[i][j + TWO] == color && game.grid[i][j + THREE] == color) ||
-				(j <= THREE &&
-				 game.grid[j][i] == color && game.grid[j + 1][i] == color &&
-				 game.grid[j + TWO][i] == color && game.grid[j + THREE][i] == color)) {
-				return true;
-			}//checking paralels above main diagonal
-			if ((i <= FOUR && j <= THREE &&
-				 game.grid[j][j + i - 1] == color &&
-				 game.grid[j + 1][j + 1 + i - 1] == color &&
-				 game.grid[j + TWO][j + TWO + i - 1] == color &&
-				 game.grid[j + THREE][j + THREE + i - 1] == color) ||
-				(i <= TWO && j <= TWO &&//checking paralels bellow main diagonal
-				 game.grid[j + i][j] == color &&
-				 game.grid[j + i + 1][j + 1] == color &&
-				 game.grid[j + i + TWO][j + TWO] == color &&
-				 game.grid[j + i + THREE][j + THREE] == color)) {
-				return true;
-			}//checking paralels above second diagonal
-			if ((i <= FOUR && j <= THREE &&
-				 game.grid[j][(COLUMNS_NO - j + 1) - i + 1] == color &&
-				 game.grid[j + 1][(COLUMNS_NO - j + 1) - i + 1 - 1] == color &&
-				 game.grid[j + TWO][(COLUMNS_NO - j + 1) - i + 1 - 2] == color &&
-				 game.grid[j + THREE][(COLUMNS_NO - j + 1) - i + 1 - THREE] == color) ||
-				(i <= TWO && j <= TWO &&//checking paralels bellow second diagonal
-				 game.grid[j + i][(COLUMNS_NO - j + 1)] == color &&
-				 game.grid[j + i + 1][(COLUMNS_NO - j + 1) - 1] == color &&
-				 game.grid[j + i + TWO][(COLUMNS_NO - j + 1) - TWO] == color &&
-				 game.grid[j + i + THREE][(COLUMNS_NO - j + 1) - THREE] == color)) {
+function checkWinner(color) {
+	for (let i = LINES_NO; i >= 1; --i) {
+		for (let j = 1; j <= COLUMNS_NO; ++j) {
+			let lines = 0, columns = 0, mainDiag = 0, secDiag = 0;
+			for (let l = 0; l < FOUR; ++l) {
+				if (j + l <= COLUMNS_NO && game.grid[i][j + l] == color) {
+					++lines;
+				}
+				if (i - l >= 1 && game.grid[i - l][j] == color) {
+					++columns;
+				}
+				if (i - l >= 1 && j + l <= COLUMNS_NO && game.grid[i - l][j + l] == color) {
+					++mainDiag;
+				}
+				if (i - l >= 1 && j - l >= 1 && game.grid[i - l][j - l] == color) {
+					++secDiag;
+				}
+			}
+			if (lines == FOUR || columns == FOUR || mainDiag == FOUR || secDiag == FOUR) {
 				return true;
 			}
 		}
@@ -63,10 +49,10 @@ function createRemoteAndLocalGrid() {
 	for (let i = 1; i <= COLUMNS_NO; ++i) {
 		game.grid[i] = [];
 		let column = document.createElement("div");
-		column.setAttribute("id", i);
-		column.setAttribute("class", "col");
+		column.id = i;
+		column.classList.add("col");
 		column.setAttribute("onclick", "userMove(this)");
-		for (let j = 0; j < LINES_NO; ++j) {
+		for (let j = 1; j <= LINES_NO; ++j) {
 			let cell = document.createElement("div");
 			cell.setAttribute("class", "cell borderRadius");
 			column.appendChild(cell);
@@ -101,7 +87,7 @@ function userMove(element) {
 			game.grid[COLUMNS_NO - game.columns[id]][id] = game.pen;
 			++game.clicks[game.pen];
 			game.clicks[game.oponent] = 0;
-			game.winner = checkWinner2(game.pen);
+			game.winner = checkWinner(game.pen);
 			if (game.winner) {
 				alert(`Congratulations !!! the player using ${game.pen} has won !!!`);
 				setMessage(`Congratulations !!! the player using ${game.pen} has won !!!`, game.pen);
