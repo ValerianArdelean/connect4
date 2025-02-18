@@ -8,7 +8,7 @@ const ONE = 1;
 let game = {
 	columns: [0, 0, 0, 0, 0, 0, 0, 0],
 	pen: "",
-	oponent: "",
+	opponent: "",
 	winner: "",
 	clicks: {
 		red: 0,
@@ -67,10 +67,10 @@ function setMessage(message, color) {
 	element.children[0].style.color = color;
 }
 
-function userChoice(color, oponent) {
+function userChoice(color, opponent) {
 	if (game.clicks[color] === 0 && !game.winner) {
 		game.pen = color;
-		game.oponent = oponent;
+		game.opponent = opponent;
 		setMessage("you chosen " + game.pen, color);
 	} else if (!game.winner) {
 		setMessage("don't try on cheating !", color);
@@ -86,7 +86,7 @@ function userMove(element) {
 			cell.style.backgroundColor = game.pen;
 			game.grid[COLUMNS_NO - game.columns[id]][id] = game.pen;
 			++game.clicks[game.pen];
-			game.clicks[game.oponent] = 0;
+			game.clicks[game.opponent] = 0;
 			game.winner = checkWinner(game.pen);
 			if (game.winner) {
 				alert(`Congratulations !!! the player using ${game.pen} has won !!!`);
