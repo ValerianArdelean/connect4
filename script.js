@@ -17,6 +17,24 @@ let game = {
 	grid: [[], [], [], [], [], [], [], []]
 }
 
+function createRemoteAndLocalGrid() {
+	let grid = document.getElementById("grid");
+	game.grid[0] = [];
+	for (let i = 1; i <= COLUMNS_NO; ++i) {
+		game.grid[i] = [];
+		let column = document.createElement("div");
+		column.id = i;
+		column.classList.add("col");
+		column.setAttribute("onclick", "userMove(this)");
+		for (let j = 1; j <= LINES_NO; ++j) {
+			let cell = document.createElement("div");
+			cell.setAttribute("class", "cell borderRadius");
+			column.appendChild(cell);
+		}
+		grid.appendChild(column);
+	}
+}
+
 function checkWinner(color) {
 	for (let i = LINES_NO; i >= 1; --i) {
 		for (let j = 1; j <= COLUMNS_NO; ++j) {
@@ -41,24 +59,6 @@ function checkWinner(color) {
 		}
 	}
 	return false;
-}
-
-function createRemoteAndLocalGrid() {
-	let grid = document.getElementById("grid");
-	game.grid[0] = [];
-	for (let i = 1; i <= COLUMNS_NO; ++i) {
-		game.grid[i] = [];
-		let column = document.createElement("div");
-		column.id = i;
-		column.classList.add("col");
-		column.setAttribute("onclick", "userMove(this)");
-		for (let j = 1; j <= LINES_NO; ++j) {
-			let cell = document.createElement("div");
-			cell.setAttribute("class", "cell borderRadius");
-			column.appendChild(cell);
-		}
-		grid.appendChild(column);
-	}
 }
 
 function setMessage(message, color) {
@@ -91,10 +91,10 @@ function userMove(element) {
 			if (game.winner) {
 				alert(`Congratulations !!! the player using ${game.pen} has won !!!`);
 				setMessage(`Congratulations !!! the player using ${game.pen} has won !!!`, game.pen);
-            }
+			}
 		} else {
 			setMessage("change color !!", "black");
-        }
+		}
 	} else if (!game.pen && !game.winner) {
 		setMessage("choose a color first !!!", "black");
 	}
