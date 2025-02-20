@@ -1,6 +1,6 @@
 const LINES_NO = 6;
 const COLUMNS_NO = 7;
-const FOUR = 4;
+const NO_DIR = 4;
 const THREE = 3;
 const TWO = 2;
 const ONE = 1;
@@ -39,7 +39,7 @@ function checkWinner(color) {
 	for (let i = LINES_NO; i >= 1; --i) {
 		for (let j = 1; j <= COLUMNS_NO; ++j) {
 			let lines = 0, columns = 0, mainDiag = 0, secDiag = 0;
-			for (let l = 0; l < FOUR; ++l) {
+			for (let l = 0; l < NO_DIR; ++l) {
 				if (j + l <= COLUMNS_NO && game.grid[i][j + l] == color) {
 					++lines;
 				}
@@ -53,7 +53,7 @@ function checkWinner(color) {
 					++secDiag;
 				}
 			}
-			if (lines == FOUR || columns == FOUR || mainDiag == FOUR || secDiag == FOUR) {
+			if (lines == NO_DIR || columns == NO_DIR || mainDiag == NO_DIR || secDiag == NO_DIR) {
 				return true;
 			}
 		}
